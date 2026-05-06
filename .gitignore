@@ -1,0 +1,10 @@
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+.vercel
+.netlify
+.gemini/

@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  avatar       String?
+  createdAt    DateTime @default(now())
+  memberships  ProjectMember[]
+  tasks        Task[]   @relation("AssignedTasks")
+  createdTasks Task[]   @relation("CreatedTasks")
+  comments     Comment[]
+  activities   Activity[]
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  color       String   @default("#7c3aed")
+  icon        String   @default("folder")
+  createdAt   DateTime @default(now())
+  deadline    DateTime?
+  members     ProjectMember[]
+  tasks       Task[]
+}
+
+model ProjectMember {
+  id        String   @id @default(uuid())
+  role      String   @default("MEMBER")
+  joinedAt  DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+
+  @@unique([userId, projectId])
+}
+
+model Task {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  status      String     @default("TODO")
+  priority    String     @default("MEDIUM")
+  dueDate     DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  project     Project    @relation(fields: [projectId], references: [id])
+  projectId   String
+  assignee    User?      @relation("AssignedTasks", fields: [assigneeId], references: [id])
+  assigneeId  String?
+  creator     User       @relation("CreatedTasks", fields: [creatorId], references: [id])
+  creatorId   String
+  tags        String     @default("[]")
+  comments    Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+}
+
+model Activity {
+  id          String   @id @default(uuid())
+  type        String   // CREATE, UPDATE, COMMENT, DELETE
+  entity      String   // TASK, PROJECT
+  entityId    String
+  entityTitle String?
+  action      String   // e.g., "created task", "updated status to DONE"
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
