@@ -1,4 +1,4 @@
-# TaskFlow: Team Task Manager
+# TaskFlow: Team Task Manager 
 
 TaskFlow is a premium, full-stack team management application designed with a futuristic dark glassmorphism aesthetic. It empowers teams to collaborate seamlessly with real-time activity tracking, interactive data visualizations, and an intuitive Kanban-style workflow.
 
