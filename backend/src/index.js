@@ -16,8 +16,12 @@ const teamRoutes = require('./routes/team.routes');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('TaskFlow API is running. Please access the app via the frontend at http://localhost:5173');
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date() });
 });
 
 app.use(helmet());
@@ -50,6 +54,10 @@ app.get('/api/health', (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
