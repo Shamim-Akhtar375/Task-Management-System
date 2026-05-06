@@ -5,7 +5,7 @@
 TaskFlow is a premium, full-stack team management application designed with a futuristic dark glassmorphism aesthetic. It empowers teams to collaborate seamlessly with real-time activity tracking, interactive data visualizations, and an intuitive Kanban-style workflow.
 
 <img width="1918" height="853" alt="image" src="https://github.com/user-attachments/assets/54767000-910c-474b-b3d2-c9401fd50960" />
-<img width="1918" height="847" alt="image" src="https://github.com/user-attachments/assets/4ac9b455-0c39-4706-bbcb-fcd704372433" />
+
 
 
 
