@@ -68,8 +68,6 @@ TaskFlow is a premium, full-stack team management application designed with a fu
    npm run dev
    ```
 
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 Built with ❤️ by [Shamim Akhtar](https://github.com/Shamim-Akhtar375)
